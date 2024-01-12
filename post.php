@@ -11,6 +11,17 @@
 
     <div style="text-align: center;">
         ต้องการดูกระทู้หมายเลข <?php echo $_GET['id']; ?> 
+        <BR>
+        
+        <?php
+            $num = $_GET['id'];
+
+            if(($num % 2) == 0){
+                echo "เป็นกระทู้หมายเลขคู่";
+            }else{
+                echo "เป็นกระทู้หมายเลขคี่";
+            }
+        ?>
         
     </div>
     <br>
@@ -28,7 +39,7 @@
     <br> 
         
     <div style="text-align: center;">
-        <a  href="index.html">กลับไปหน้าหลัก</a>
+        <a  href="index.php">กลับไปหน้าหลัก</a>
     </div>
         
    
