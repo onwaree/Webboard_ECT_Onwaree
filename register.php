@@ -1,9 +1,18 @@
+
+<?php
+session_start();
+if(isset($_SESSION['id'])){
+    header("location:index.php");
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>register</title>
 </head>
 <body>
     <h1 style="text-align: center;">สมัครสมาชิก</h1>
@@ -46,7 +55,7 @@
 
         <br>
         <div style="text-align: center;">
-            <a href="index.html">กลับไปหน้าหลัก</a>
+            <a href="index.php">กลับไปหน้าหลัก</a>
         </div>
         <!-- <center>ถ้ายังไม่ได้เป็นสมาชิก <a href="register.html">กรุณาสมัครสามาชิก</a></center> -->
 
@@ -55,3 +64,5 @@
     </form>
 </body>
 </html>
+
+
