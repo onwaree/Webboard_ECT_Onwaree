@@ -1,9 +1,9 @@
 <?php
-session_start();
-if(isset($_SESSION['id'])){
-    header("location:index.php");
-    die();
-}
+    session_start();
+    if(isset($_SESSION['id'])){
+        header("location:index.php");
+        die();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +14,6 @@ if(isset($_SESSION['id'])){
     <title>Verify</title>
 </head>
 <body>
-    <h1 style="text-align: center;">Webboard</h1>
-    <hr>
     <div style="text-align: center;">
         <?php
             $name = $_POST['name'];
@@ -27,8 +25,11 @@ if(isset($_SESSION['id'])){
                 $_SESSION['role'] = 'a';
                 $_SESSION['id'] = session_id();
 
-                echo "ยินดีต้อนรับคุณ ADMIN <BR> ";
-                echo "<a href=index.php> กลับไปยังหน้าหลัก </a>";
+                // echo "ยินดีต้อนรับคุณ ADMIN <BR> ";
+                // echo "<a href=index.php> กลับไปยังหน้าหลัก </a>";
+
+                header('location:index.php');
+                die();
                 
 
             }elseif($name == 'member' && $pwd == 'mem1234'){
@@ -37,13 +38,20 @@ if(isset($_SESSION['id'])){
                 $_SESSION['role'] = 'm';
                 $_SESSION['id'] = session_id();
 
-                echo "ยินดีต้อนรับคุณ MEMBER <BR> ";
-                echo "<a href=index.php> กลับไปยังหน้าหลัก </a>";
+                // echo "ยินดีต้อนรับคุณ MEMBER <BR> ";
+                // echo "<a href=index.php> กลับไปยังหน้าหลัก </a>";
+
+                header('location:index.php');
+                die();
 
             }else{
 
-                echo "ขื่อบัญชีหรือรหัสผ่านไม่ถูกต้อง <BR> ";
-                echo "<a href=index.php> กลับไปยังหน้าหลัก </a>";
+                // echo "ขื่อบัญชีหรือรหัสผ่านไม่ถูกต้อง <BR> ";
+                // echo "<a href=index.php> กลับไปยังหน้าหลัก </a>";
+
+                $_SESSION['error'] = 'error';
+                header('location:login.php');
+                die();
 
             }
         ?>
