@@ -40,8 +40,8 @@ if(isset($_SESSION['id'])){
                         <div class="card-body">
                             <form action="verify.php" method="post">
                                 <div class="form-group">
-                                    <label for="user" class="form-label">Login:</label>
-                                    <input type="text" name="name" id="user" class="form-control" required>
+                                    <label for="login" class="form-label">Login:</label>
+                                    <input type="text" name="login" id="login" class="form-control" required>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label for="pwd" class="form-label">Password:</label>
