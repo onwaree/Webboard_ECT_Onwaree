@@ -53,7 +53,7 @@ session_start();
             <?php
                 }
             ?>
-
+            
         </div>
 
         <table class="table table-striped mt-4">
@@ -69,12 +69,16 @@ session_start();
 
                     while($row = $result->fetch()){
                         echo "<tr>
-                                <td>[$row[0]]
+                                <td class='d-flex justify-content-between'>
+                                <div>[$row[0]]
                                     <a href=post.php?id=$row[2] style=text-decoration: none;>$row[1]</a>
                                     <br>
                                     $row[3] - $row[4]
-                                </td>
-                              </tr>";
+                                </div>";
+                                if(isset($_SESSION['id']) && $_SESSION['role'] == 'a'){
+                                    echo "<div class='me-2 mt-2'><a href=delete.php?id=$row[2] class='btn btn-danger btn-sm'>ลบ</a></div>";
+                                }
+                                echo " </td>  </tr>";
                     }
                     $conn = null;
                 ?>
