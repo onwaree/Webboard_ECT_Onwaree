@@ -60,26 +60,23 @@ if(!isset($_SESSION['id'])){
                 </div>
             <?php
                 }
+                $conn = null;
             ?>
 
                
             <?php
                 $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8;","root","");
 
-                $sql = "SELECT c.id,c.content,c.post_date,c.user_id,c.post_id,u.login from comment as c
+                $sql = "SELECT c.content,c.post_date,c.user_id,c.post_id,u.login from comment as c
                         INNER JOIN user as u ON u.id = c.user_id 
-                        INNER JOIN post as p ON p.id = c.post_id
-                        WHERE c.post_id = {$_GET['id']}
-                        ORDER BY c.post_date ASC";
+                        WHERE c.post_id = {$_GET['id']}";
                 $result = $conn->query($sql);
-
-                foreach($result as $row){
-            ?>
-                <div class="card border-info mt-3 mb-3 mb-3">
-                    <div class="card-header bg-info text-white"> ความคิดเห็นที่ <?php echo $row['id'] ?>   </div>
-                    <div class="card-body">
-                        <?php echo
-                            "<tr>
+                $n = 1;
+                while($row = $result->fetch()){
+                    echo "<div class='card border-info mt-3 mb-3'>";
+                        echo "<div class='card-header bg-info text-white'> ความคิดเห็นที่ $n </div>";
+                        echo "<div class='card-body'> 
+                            <tr>
                                 <td>
                                     $row[content]
                                 </td>
@@ -88,14 +85,16 @@ if(!isset($_SESSION['id'])){
                                 <td>
                                     $row[login] - $row[post_date]
                                 </td>
-                             </tr>"
-                         ?>
-                    </div>
-                </div>
-            <?php
+                             </tr>";
+                        echo "</div>";
+                    echo "</div>";
+                    $n = $n + 1;
                 }
+                $conn = null;
             ?>
 
+            <?php if(isset($_SESSION['id'])){
+            ?>
                 <div class="card border-success mt-3">
                     <div class="card-header bg-success text-white"> แสดงความคิดเห็น </div>
                     <div class="card-body">
@@ -119,7 +118,9 @@ if(!isset($_SESSION['id'])){
                         </form>
                     </div>
                 </div>
-
+                <?php
+                    }
+                ?>
             </div>
             <div class="col-lg-3 col-md-2 col-sm-1"></div>
         </div>

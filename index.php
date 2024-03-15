@@ -14,6 +14,13 @@ session_start();
 
     <!-- <link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css">
     <script src="bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script> -->
+    <script>
+        function myfunction(){
+            let r = confirm("ต้องการจะลบหรือไม่");
+            return r;
+        }
+    </script>
+ 
 </head>
 <body>
     <div class="container-lg">
@@ -35,12 +42,13 @@ session_start();
                                 $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
                                 $sql = "SELECT * FROM category";
                                 foreach($conn->query($sql) as $row){
-                                    echo "<li> <a class='dropdown-item' href=#> $row[name] </a> </li>";
+                                    echo "<li> <a class='dropdown-item' style=text-decoration: none; href=# > $row[name] </a> </li>";
                                 }
                                 $conn = null;
                             ?>
                         </ul>
                     </button>
+                    <template style="text-decoration: none;"></template>
                 </span>
             </div>
             
@@ -71,12 +79,12 @@ session_start();
                         echo "<tr>
                                 <td class='d-flex justify-content-between'>
                                 <div>[$row[0]]
-                                    <a href=post.php?id=$row[2] style=text-decoration: none;>$row[1]</a>
+                                    <a href=post.php?id=$row[2] style=text-decoration: none>$row[1]</a>
                                     <br>
                                     $row[3] - $row[4]
                                 </div>";
                                 if(isset($_SESSION['id']) && $_SESSION['role'] == 'a'){
-                                    echo "<div class='me-2 mt-2'><a href=delete.php?id=$row[2] class='btn btn-danger btn-sm'>ลบ</a></div>";
+                                    echo "<div class='me-2 mt-2'><a href=delete.php?id=$row[2] class='btn btn-danger btn-sm' onclick='return myfunction()'><i class='bi bi-trash3'></i></a></div>";
                                 }
                                 echo " </td>  </tr>";
                     }
@@ -88,3 +96,4 @@ session_start();
     </div>
 </body>
 </html>
+
