@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2024 at 06:18 AM
+-- Generation Time: Mar 15, 2024 at 05:52 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -61,8 +61,6 @@ CREATE TABLE `comment` (
 
 INSERT INTO `comment` (`id`, `content`, `post_date`, `user_id`, `post_id`) VALUES
 (1, 'ไปญี่ปุ่นเลยจ้าๆๆ', '2024-03-08 10:25:23', 17, 2),
-(5, 'sdfsdfsdf', '2024-03-08 11:46:40', 13, 5),
-(6, 'dfsdf', '2024-03-08 11:48:30', 13, 5),
 (7, 'ชลบุรี ชลบุรี ชลบุรี', '2024-03-08 12:10:11', 13, 2);
 
 -- --------------------------------------------------------
@@ -88,8 +86,7 @@ INSERT INTO `post` (`id`, `title`, `content`, `post_date`, `cat_id`, `user_id`) 
 (1, 'PHP', 'เขียน PDO ยังไง', '2024-03-01 10:45:49', 2, 13),
 (2, 'ไปเที่ยวไหนดี', 'กรุงเทพ ชลบุรี ', '2024-03-01 10:49:13', 1, 13),
 (3, 'php basic', 'php basic 1', '2024-03-01 10:51:48', 2, 13),
-(4, 'กีฬา', 'กีฬา เป็นกิจกรรมหรือการเล่นเพื่อความสนุกเพลิดเพลินหรือเพื่อผ่อนคลายความเคร่งเครียด', '2024-03-01 11:16:39', 3, 16),
-(5, 'php basic2', 'WebPHP is a popular general-purpose scripting language for web development. Learn about the latest features,', '2024-03-01 11:18:31', 2, 17);
+(4, 'กีฬา', 'กีฬา เป็นกิจกรรมหรือการเล่นเพื่อความสนุกเพลิดเพลินหรือเพื่อผ่อนคลายความเคร่งเครียด', '2024-03-01 11:16:39', 3, 16);
 
 -- --------------------------------------------------------
 
@@ -165,7 +162,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
