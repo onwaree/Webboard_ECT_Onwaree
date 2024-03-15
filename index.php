@@ -42,7 +42,7 @@ session_start();
                                 $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
                                 $sql = "SELECT * FROM category";
                                 foreach($conn->query($sql) as $row){
-                                    echo "<li> <a class='dropdown-item' style=text-decoration: none; href=# > $row[name] </a> </li>";
+                                    echo "<li> <a class='dropdown-item' style=text-decoration: none; href=index.php?catid=1 > $row[name] </a> </li>";
                                 }
                                 $conn = null;
                             ?>
@@ -71,6 +71,7 @@ session_start();
                     $sql = "SELECT t3.name , t1.title , t1.id , t2.login , t1.post_date FROM post as t1
                     INNER JOIN user as t2 ON (t1.user_id = t2.id)
                     INNER JOIN category as t3 ON (t1.cat_id = t3.id) 
+                    -- WHERE -----
                     ORDER BY t1.post_date DESC";
 
                     $result = $conn->query($sql);
