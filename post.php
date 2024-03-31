@@ -1,12 +1,11 @@
 
 <?php
-session_start();
+    session_start();
 
-if(!isset($_SESSION['id'])){
-    header("location:index.php");
-    die();
-}
-
+    if(!isset($_SESSION['id'])){
+        header("location:index.php");
+        die();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +32,10 @@ if(!isset($_SESSION['id'])){
 
             <?php
                 $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8;","root","");
-
                 $sql = "SELECT p.id,p.title,p.content,p.post_date,u.login from post as p
                         INNER JOIN user as u ON u.id = p.user_id
                         WHERE p.id = {$_GET['id']} ";
                 $result = $conn->query($sql);
-
                 while($row = $result->fetch()){
             ?>
                 <div class="card border-primary mt-3">
@@ -63,7 +60,6 @@ if(!isset($_SESSION['id'])){
                 $conn = null;
             ?>
 
-               
             <?php
                 $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8;","root","");
 

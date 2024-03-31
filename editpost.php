@@ -19,53 +19,97 @@
 
 </head>
 <body>
+    <?php 
+        $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+        $sql = "SELECT p.user_id FROM post as p
+                WHERE p.id = {$_GET['id']}";
+         $result = $conn->query($sql);
+         $row = $result->fetch();
+
+        if($_SESSION['user_id'] == $row['user_id']){  
+    ?>
+
     <div class="container">
         <h1 style="text-align: center;" class="mt-3">Webboard </h1>
         <?php
             include("nav.php");
         ?>
-
         <div class="row mt-4">
             <div class="col-lg-3 col-md-2 col-sm-1"></div>
             <div class="col-lg-6 col-md-8 col-sm-10">
-                <div class="card border-info">
-                    <div class="card-header bg-info text-white"> ตั้งกระทู้ใหม่ </div>
+                <?php
+                    if(isset($_SESSION['sucess'])){
+                        echo "<div class='alert alert-success'> แก้ไขกระทู้เรียบร้อยแล้ว </div>";
+                        unset($_SESSION['sucess']);
+                    }
+                    if(isset($_SESSION['error'])){
+                        echo "<div class='alert alert-danger'> แก้ไขกระทู้ไม่สำเร็จ </div>";
+                        unset($_SESSION['error']);
+                    }
+                ?>
+                <div class="card border-warning">
+                    <div class="card-header bg-warning text-white"> แก้ไขกระทู้ </div>
                     <div class="card-body">
-                        <form action="newpost_save.php" method="post">
+                        <form action="editpost_save.php" method="post">
+                            <input type="hidden" name="post_id" value="<?=$_GET['id'];?>">
                             <div class="row">
                                 <label class="col-lg-3 col-form-label"> หมวดหมู่: </label>
                                 <div class="col-lg-9">
                                     <select name="category" class="form-select">
                                         <?php
                                             $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-                                            $sql = "SELECT * FROM category";
+                                            $sql = "SELECT c.name , p.cat_id FROM post p
+                                                    INNER JOIN category as c ON c.id = p.cat_id
+                                                    WHERE p.id = {$_GET['id']} ";
+                                            foreach($conn->query($sql) as $row){
+                                                echo "<option value=$row[cat_id] > $row[name] </option>";
+                                            }
+                                            $conn = null;
+                                        ?>
+
+                                        <?php
+                                            $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                                            $sql = "SELECT * FROM category ";
                                             foreach($conn->query($sql) as $row){
                                                 echo "<option value=$row[id] > $row[name] </option>";
                                             }
                                             $conn = null;
                                         ?>
+
                                     </select>
                                 </div>
                             </div>
+
+                            <?php
+                              $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                              $sql = "SELECT p.title , p.content FROM post p
+                                      INNER JOIN user as u ON u.id = p.user_id
+                                      WHERE p.id = {$_GET['id']} ";
+                              foreach($conn->query($sql) as $row){
+                            ?>
                             <div class="row mt-3">
                                 <label   label class="col-lg-3 col-form-label" for="topic"> หัวข้อ: </label>
                                 <div class="col-lg-9">
-                                    <input type="text" name="topic" id="topic" class="form-control" required>
+                                    <input type="text" name="topic" id="topic" class="form-control" value="<?=$row['title']?>"  required>
                                 </div>
                             </div>
+
                             <div class="row mt-3">
                                 <label   label class="col-lg-3 col-form-label" for="comment"> เนื้อหา: </label>
                                 <div class="col-lg-9">
-                                   <textarea name="comment" id="comment"  rows="8" class="form-control" required></textarea>
+                                   <textarea name="comment" id="comment"  rows="8" class="form-control" required><?=$row['content']?></textarea>
                                 </div>
                             </div>
+
+                            <?php
+                                }
+                                $conn = null;
+                            ?>
+
                             <div class="row mt-3">
                                 <div class="col-lg-12 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-info text-white btn-sm me-2">
+                                    <button type="submit" class="btn btn-warning text-white btn-sm">
                                         <i class="bi bi-save2"></i> บันทึกข้อความ
-                                    </button>
-                                    <button type="reset" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-x-circle"></i> ยกเลิก
                                     </button>
                                 </div>
                             </div>
@@ -76,6 +120,13 @@
             <div class="col-lg-3 col-md-2 col-sm-1"></div>
         </div>
     </div>
+    <?php
+        }else{
+            header("location:index.php");
+            die();
+        }
+    
+    ?>
     <br>
 </body>
 </html>
