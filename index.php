@@ -119,8 +119,8 @@ session_start();
 
                             else if(isset($_SESSION['id']) && $_SESSION['role'] != 'a'){
                                 if($_SESSION['user_id'] == $row['user_id']){
-                                    echo "<span class='me-2 mt-2'><a href=delete.php?id=$row[id] class='btn btn-danger btn-sm' onclick='return myfunction()'><i class='bi bi-trash3'></i></a></span>
-                                    <span class='me-2 mt-2'><a href=editpost.php?id=$row[id] class='btn btn-warning btn-sm' ><i class='bi bi-pencil-square'></i></a></span></span>";
+                                    echo "<span class='me-2 mt-2'> <a href=delete.php?id=$row[id] class='btn btn-danger btn-sm' onclick='return myfunction()'><i class='bi bi-trash3'></i></a></span>
+                                    <span class='me-2 mt-2'> <a href=editpost.php?id=$row[id] class='btn btn-warning btn-sm' ><i class='bi bi-pencil-square'></i></a></span></span>";
                                 }
 
                             }
