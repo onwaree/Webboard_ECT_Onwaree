@@ -57,23 +57,20 @@
                                 <div class="col-lg-9">
                                     <select name="category" class="form-select">
                                         <?php
-                                            $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-                                            $sql = "SELECT c.name , p.cat_id FROM post p
+                                            $con1 = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                                            $sql1 = "SELECT c.name , p.cat_id FROM post p
                                                     INNER JOIN category as c ON c.id = p.cat_id
                                                     WHERE p.id = {$_GET['id']} ";
-                                            foreach($conn->query($sql) as $row){
+                                            foreach($con1->query($sql1) as $row){
                                                 echo "<option value=$row[cat_id] > $row[name] </option>";
                                             }
-                                            $conn = null;
-                                        ?>
 
-                                        <?php
-                                            $conn = new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-                                            $sql = "SELECT * FROM category ";
-                                            foreach($conn->query($sql) as $row){
-                                                echo "<option value=$row[id] > $row[name] </option>";
+                                            $sql2 = "SELECT * FROM category as c
+                                                    WHERE c.id != $row[cat_id]";
+                                            foreach($con1->query($sql2) as $rows){
+                                                echo "<option value=$rows[id] > $rows[name] </option>";
                                             }
-                                            $conn = null;
+                                            $con1 = null;
                                         ?>
 
                                     </select>
